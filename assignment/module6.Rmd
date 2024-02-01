@@ -568,7 +568,7 @@ The probablistic forecast represents uncertainty, which makes me more hesistate 
 
 **Parameter uncertainty** refers to the uncertainty in the model parameter values, which can be due to having a limited set of data used to calibrate a model.
 
-With traditional modelling efforts, people general find one set of the 'best fit' parameters and use them to predict with their model. 
+With traditional modelling efforts, people generally find one set of the 'best fit' parameters and use them to predict with their model. 
 
 This method does not account for the uncertainty around the estimation of these parameters.  
 
@@ -684,7 +684,7 @@ plot_forecast(lake_obs,
 
 
 **Answer Q.14**
-
+Parameter uncertainty can be reduced by using more observations to calibrate parameters, by changing a parameter to result in model outputs that better match observed data.
 
 
 ## Objective 7. Generate a forecast with process uncertainty
@@ -847,7 +847,7 @@ plot_forecast(lake_obs,
 
 
 **Answer Q.15**
-
+Initial condition uncertainty occurs due to a lack of measurement of initial conditions, or to account for the lack of precision in initial conditions measurements.
 
 
 # Activity C:
@@ -860,17 +860,22 @@ Below, we will adjust the forecasting for-loop to incorporate all four sources o
 Setting up an empty dataframe that we will fill with our water temperature predictions. **Note** the use of the `rows_update()` function to populate the starting date of the forecast with values from our initial conditions distribution.
 
 ```{r}
-forecast_total_unc <- tibble(forecast_date = rep(forecasted_dates, times = n_members),
-                             ensemble_member = rep(1:n_members, each = length(forecasted_dates)),
-                             forecast_variable = "water_temperature",
-                             value = as.double(NA),
-                             uc_type = "total") %>%
-  rows_update(ic_df, by = c("forecast_date","ensemble_member","forecast_variable")) 
+forecast_total_unc <-
+  tibble(
+    forecast_date = rep(forecasted_dates, times = n_members),
+    ensemble_member = rep(1:n_members, each = length(forecasted_dates)),
+    forecast_variable = "water_temperature",
+    value = as.double(NA),
+    uc_type = "total"
+  ) %>%
+  rows_update(ic_df,
+              by = c("forecast_date", "ensemble_member", "forecast_variable")) 
 ```
 
 Run forecast. **Note** that we use all 30 NOAA air temperature forecast ensemble members, use a distribution of parameter values rather than fixed values, and have added process uncertainty to each iteration of our forecast.
 
 ```{r}
+#add this forloop to my model forecast
 for(i in 2:length(forecasted_dates)) {
   
   #pull prediction dataframe for relevant date
@@ -931,15 +936,15 @@ plot_partitioned_uc(sd_df)
 **Q.16 (Shiny)** Which source of uncertainty contributes the most to total forecast uncertainty? 
 
 **Answer Q.16**
-
-
+Parameter uncertainty contributes the most uncertainty beyond the first day of the forecast.
 
 
 **Q.17 (Rmd)** Do you think that different water temperature forecast models would have the same or different quantities of uncertainty? Why?
 
 **Answer Q.17**
+Different water temperature forecast models would have different quantities and distriubtions of uncertainty because they would be parameterized different ways, probably built on different data sets and initial conditions which controls how much uncertainty from each of those sources occur.
 
-
+####STOP HERE
 
 ## Objective 11. Build and fit your own model
 
