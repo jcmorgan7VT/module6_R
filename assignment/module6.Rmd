@@ -485,11 +485,11 @@ plot_forecast(lake_obs,
 
 
 **Answer Q.11** 
-
+The forecasted water temperature is very similar to the forecasted air temperature, probably because the air temperature is the only input to the linear model other than the water temperature the previous day, so air temperature over time will drive the model, while on a day to day basis the water temperature the day before is more important.
 
 ### What is wrong with deterministic forecasts?
 
-Using a **deterministic** forecast (e.g. a forecast which is one single line, with no uncertainty) is likely to wrong (even if only slightly) because it ignores the uncertainty that is inherently associated with the future.
+Using a **deterministic** forecast (e.g. a forecast which is one single line, with no uncertainty) is likely to be wrong (even if only slightly) because it ignores the uncertainty that is inherently associated with the future.
 
 There are many things that contribute to uncertainty when generating a forecast, and a forecast should represent the range of potential outcomes and the **likelihood** of such outcomes occurring.
 
@@ -555,13 +555,13 @@ plot_forecast(lake_obs,
 **Q.12 (Shiny)** How does forecast uncertainty change further into the future?
 
 **Answer Q.12**
-
+Forecast uncertainty grows larger and larger the further out from observations one goes.
 
 
 **Q.13 (Rmd)** Compare the plot above of the probabilistic forecast with driver uncertainty to the plot of the deterministic forecast. How do the differences in these two forecasts affect your understanding of what water temperatures are likely to be during the week of the forecast?  
 
 **Answer Q.13** 
-
+The probablistic forecast represents uncertainty, which makes me more hesistate to believe that the temperature would be what the deterministic predticts.
 
 
 ## Objective 6. Generate a forecast with parameter uncertainty
